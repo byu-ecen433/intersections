@@ -1,0 +1,7 @@
+# Parameters for your nodes in the simulator (test:=true), one block per node.
+# Loaded into the group namespace, so the block for lane_controller_node becomes
+# that node's private (~) parameters.
+#
+# TODO (Part I): a lane_controller_node block with your Lab 5 gains.
+# TODO (Part II-IV): an intersection_node block as you add parameters.
+

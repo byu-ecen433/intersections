@@ -1,0 +1,43 @@
+<launch>
+
+  <!--
+    ECEN 433 - Lab 6, intersections.
+
+        test:=true    the intersection simulator and a live plot, on your laptop
+        test:=false   on the robot, next to your Lab 4 stack
+  -->
+
+  <arg name="test" default="false"/>
+  <arg name="ns" value="intersections_test" if="$(arg test)"/>
+  <arg name="ns" value="$(optenv VEHICLE_NAME duckiebot)" unless="$(arg test)"/>
+
+  <group ns="$(arg ns)">
+
+    <!-- TODO (Part I): load config/$(arg ns).yaml with <rosparam>, then add your Lab 3
+         odometry as odometry_node, your Lab 5 controller as lane_controller_node, and
+         simple_stop_controller_node. -->
+
+    <!-- TODO (Part II): intersection_node, remapping its ~mode onto fsm_node/mode and its
+         ~car_cmd onto the topic car_cmd_switch_node reads in INTERSECTION_CONTROL. -->
+
+    <!-- Simulator only: the robot stand-in, the plot, and Duckietown's real command switch. -->
+    <group if="$(arg test)">
+      <node pkg="intersection_control" type="intersection_sim_node.py"
+            name="intersection_sim_node" output="screen"/>
+      <node pkg="intersection_control" type="intersection_graph.py" name="intersection_graph"/>
+      <node pkg="dagu_car" type="car_cmd_switch_node.py" name="car_cmd_switch_node">
+        <rosparam file="$(find dagu_car)/config/car_cmd_switch_node/default.yaml"/>
+      </node>
+    </group>
+
+    <!-- Robot only: Duckietown's AprilTag detector on the camera. -->
+    <node unless="$(arg test)" pkg="apriltag" type="apriltag_detector_node.py"
+          name="apriltag_detector_node">
+      <rosparam file="$(find apriltag)/config/apriltag_detector_node/duckiebot.yaml"/>
+      <remap from="~image" to="camera_node/image/compressed"/>
+      <remap from="~camera_info" to="camera_node/camera_info"/>
+    </node>
+
+  </group>
+
+</launch>
