@@ -15,4 +15,5 @@
   <exec_depend>std_msgs</exec_depend>
   <exec_depend>duckietown_msgs</exec_depend>
   <exec_depend>geometry_msgs</exec_depend>
+  <exec_depend>std_srvs</exec_depend>
 </package>

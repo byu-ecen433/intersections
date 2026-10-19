@@ -13,7 +13,9 @@
 
   <group ns="$(arg ns)">
 
-    <!-- TODO (Part I): load config/$(arg ns).yaml with <rosparam>, then add your Lab 3
+    <rosparam file="$(find intersection_control)/config/$(arg ns).yaml"/>
+
+    <!-- TODO (Part I): add your Lab 3
          odometry as odometry_node, your Lab 5 controller as lane_controller_node, and
          simple_stop_controller_node. -->
 
@@ -38,6 +40,8 @@
       <remap from="~camera_info" to="camera_node/camera_info"/>
     </node>
 
+    <node unless="$(arg test)" pkg="intersection_control" type="switch_on_node.py"
+          name="switch_on_node" output="screen"/>
   </group>
 
 </launch>

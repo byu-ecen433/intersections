@@ -2,6 +2,12 @@
 # Loaded into the group namespace, so the block for lane_controller_node becomes
 # that node's private (~) parameters.
 #
-# TODO (Part I): a lane_controller_node block with your Lab 5 gains.
-# TODO (Part II-IV): an intersection_node block as you add parameters.
 
+# TODO (Part I): a lane_controller_node block with your Lab 5 gains.
+lane_controller_node:
+  placeholder: true
+
+
+# TODO (Part II-IV): an intersection_node block as you add parameters.
+intersection_node:
+  placeholder: true

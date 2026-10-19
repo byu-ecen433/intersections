@@ -13,13 +13,8 @@ dt-launchfile-init
 #     dts devel build -H DUCKIEBOT_NAME -f
 #     dts devel run   -H DUCKIEBOT_NAME -L intersections
 #
-# stop_line_filter_node starts switched off, so turn it on first. Waits here
-# until the Lab 4 stack is up.
-until rosservice call "/${VEHICLE_NAME}/stop_line_filter_node/switch" "data: true" > /dev/null 2>&1; do
-    echo "waiting for stop_line_filter_node - is your Lab 4 lane_following running?"
-    sleep 2
-done
 dt-exec roslaunch intersection_control intersections.launch test:=false
+
 
 # ----------------------------------------------------------------------------
 # YOUR CODE ABOVE THIS LINE
